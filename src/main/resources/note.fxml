@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="25" vgap="15"
+          fx:controller="xyz.hnnknk.pistolstar.NoteController"
+          prefHeight="475.0" prefWidth="650.0">
+
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Напишите свою заметку!"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="2" GridPane.rowSpan="1"
+           GridPane.halignment="CENTER"/>
+
+    <Label text="Название заметки"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.halignment="RIGHT"/>
+
+    <Label text="Заметка"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"
+           GridPane.halignment="RIGHT"/>
+
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"
+            GridPane.halignment="LEFT"/>
+
+    <TextArea fx:id="area" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="LEFT" wrapText="true" />
+
+    <Button text="Написать заметку" onAction="#handleSubmitButtonAction"
+            GridPane.halignment="RIGHT"
+            GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+
+</GridPane>
