@@ -34,6 +34,32 @@ public class Database {
         }
     }
 
+    public static void checkDbExistense() throws SQLException, ClassNotFoundException{
+
+        String createStmt =
+                "CREATE TABLE NOTE\n" +
+                        "(\n" +
+                        "NOTE_NAME VARCHAR(30),\n" +
+                        "NOTE_DATE VARCHAR(30),\n" +
+                        "NOTE_BODY VARCHAR(100)\n" +
+                        ");\n";
+        Statement stmt = null;
+
+        try {
+            dbConnect();
+            DatabaseMetaData dbm = conn.getMetaData();
+            ResultSet tables = dbm.getTables(null, null, "NOTE", null);
+            if (!tables.next()) {
+                conn.createStatement().executeQuery(createStmt);
+            }
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            dbDisconnect();
+        }
+    }
+
 
     public static ResultSet dbExecuteQuery(String queryStmt) throws SQLException, ClassNotFoundException {
 

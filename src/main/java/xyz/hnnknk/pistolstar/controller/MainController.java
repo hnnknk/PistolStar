@@ -38,6 +38,11 @@ public class MainController implements Initializable {
         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("note.fxml")))));
     }
 
+    @FXML
+    protected void handleUpdateButtonAction() {
+        new Thread(this::searchNotes).start();
+    }
+
 
     @FXML
     private void searchNotes() {
