@@ -11,7 +11,7 @@ public class Database {
 
     private static Connection conn = null;
 
-    public static void dbConnect() throws SQLException, ClassNotFoundException {
+    private static void dbConnect() throws SQLException, ClassNotFoundException {
 
         try {
             Class.forName(JDBC_DRIVER);
@@ -28,13 +28,9 @@ public class Database {
         }
     }
 
-    public static void dbDisconnect() throws SQLException {
-        try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
-            }
-        } catch (Exception e){
-            throw e;
+    private static void dbDisconnect() throws SQLException {
+        if (conn != null && !conn.isClosed()) {
+            conn.close();
         }
     }
 
@@ -77,8 +73,6 @@ public class Database {
             dbConnect();
             stmt = conn.createStatement();
             stmt.executeUpdate(sqlStmt);
-        } catch (SQLException e) {
-            throw e;
         } finally {
             if (stmt != null) {
                 stmt.close();

@@ -7,7 +7,6 @@ import xyz.hnnknk.pistolstar.entity.Note;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.*;
 
 public class NoteDAO implements Runnable{
 
@@ -16,12 +15,10 @@ public class NoteDAO implements Runnable{
         String selectStmt = "SELECT * FROM note";
         ResultSet rsEmps = Database.dbExecuteQuery(selectStmt);
 
-        ObservableList<Note> list = getNotesList(rsEmps);
-
-        return list;
+        return getNotesList(rsEmps);
     }
 
-    private ObservableList<Note> getNotesList(ResultSet rs) throws SQLException, ClassNotFoundException {
+    private ObservableList<Note> getNotesList(ResultSet rs) throws SQLException {
 
         ObservableList<Note> notesList = FXCollections.observableArrayList();
 
@@ -36,7 +33,7 @@ public class NoteDAO implements Runnable{
         return notesList;
     }
 
-    public void insertNote(String name, String date, String body) throws InterruptedException {
+    public void insertNote(String name, String date, String body) {
 
             String updateStmt =
                     "INSERT INTO NOTE\n" +
@@ -47,9 +44,7 @@ public class NoteDAO implements Runnable{
 
             try {
                 Database.dbExecuteUpdate(updateStmt);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
     }

@@ -15,7 +15,7 @@ import xyz.hnnknk.pistolstar.entity.Note;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -23,7 +23,7 @@ public class MainController implements Initializable {
     @FXML
     private TableView notesTable;
 
-    NoteDAO noteDAO;
+    private NoteDAO noteDAO;
 
     @FXML
     private TableColumn<Note, String> nameColumn;
@@ -35,12 +35,12 @@ public class MainController implements Initializable {
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("note.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("note.fxml")))));
     }
 
 
     @FXML
-    private void searchNotes() throws SQLException, ClassNotFoundException {
+    private void searchNotes() {
         try {
             ObservableList<Note> notesData = noteDAO.searchNotes();
             populateNotes(notesData);
@@ -56,15 +56,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         noteDAO = new NoteDAO();
-        new Thread(() -> {
-            try {
-                searchNotes();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        new Thread(this::searchNotes).start();
 
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
