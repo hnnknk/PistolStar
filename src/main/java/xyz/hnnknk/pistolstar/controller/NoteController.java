@@ -29,6 +29,8 @@ public class NoteController implements Initializable {
 
     @FXML private TextField name;
 
+    @FXML private TextField date;
+
     @FXML private TextArea area;
 
     @FXML
@@ -41,7 +43,11 @@ public class NoteController implements Initializable {
     private void setFieldTextFormatter() {
         name.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= MAX_FIELD_CHARS ? change : null));
+        date.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= MAX_FIELD_CHARS ? change : null));
+
     }
+
 
     @FXML protected void handleSubmitButtonAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -56,7 +62,7 @@ public class NoteController implements Initializable {
 
     private boolean performCheckEmptyFields() {
         boolean result;
-        result = !name.getText().trim().isEmpty() && !area.getText().trim().isEmpty();
+        result = !name.getText().trim().isEmpty() && !area.getText().trim().isEmpty() && !date.getText().trim().isEmpty();
         return result;
     }
 
@@ -69,15 +75,18 @@ public class NoteController implements Initializable {
 
     @FXML
     private void insertNote () {
-        new Thread(() -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-            noteDAO.insertNote(name.getText(),dateFormat.format(new Date()), area.getText());
-        }).start();
+        new Thread(() -> noteDAO.insertNote(name.getText(),date.getText(), area.getText())).start();
+    }
+
+    private void setDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        date.setText(dateFormat.format(new Date()));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         noteDAO = new NoteDAO();
+        setDate();
         setAreaTextFormatter();
         setFieldTextFormatter();
     }

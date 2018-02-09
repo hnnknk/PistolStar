@@ -19,18 +19,25 @@
            GridPane.columnIndex="0" GridPane.rowIndex="1"
            GridPane.halignment="RIGHT"/>
 
-    <Label text="Заметка"
+    <Label text="Дата создания"
            GridPane.columnIndex="0" GridPane.rowIndex="2"
+           GridPane.halignment="RIGHT"/>
+
+    <Label text="Заметка"
+           GridPane.columnIndex="0" GridPane.rowIndex="3"
            GridPane.halignment="RIGHT"/>
 
     <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1"
             GridPane.halignment="LEFT"/>
 
-    <TextArea fx:id="area" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="LEFT" wrapText="true" />
+    <TextField fx:id="date" GridPane.columnIndex="1" GridPane.rowIndex="2"
+               GridPane.halignment="LEFT"/>
+
+    <TextArea fx:id="area" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.halignment="LEFT" wrapText="true" />
 
     <Button text="Написать заметку" onAction="#handleSubmitButtonAction"
             GridPane.halignment="RIGHT"
-            GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
 
 </GridPane>
