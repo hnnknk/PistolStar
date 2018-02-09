@@ -9,8 +9,8 @@
 <?import javafx.geometry.Insets?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="25" vgap="15"
-          fx:controller="xyz.hnnknk.pistolstar.MainController"
-          prefHeight="475.0" prefWidth="650.0">
+          fx:controller="xyz.hnnknk.pistolstar.controller.MainController"
+          prefHeight="575.0" prefWidth="1000.0">
 
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
 
@@ -27,9 +27,9 @@
         <columns>
             <TableColumn fx:id="nameColumn" text="Имя заметки" minWidth="100"/>
 
-            <TableColumn fx:id="dateColumn" text="Дата заметки" minWidth="100"/>
+            <TableColumn fx:id="dateColumn" text="Дата заметки" minWidth="150"/>
 
-            <TableColumn fx:id="bodyColumn" text="Заметка" minWidth="400"/>
+            <TableColumn fx:id="bodyColumn" text="Заметка" minWidth="700"/>
 
         </columns>
     </TableView>

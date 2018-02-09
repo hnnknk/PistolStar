@@ -1,4 +1,4 @@
-package xyz.hnnknk.pistolstar;
+package xyz.hnnknk.pistolstar.controller;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import xyz.hnnknk.pistolstar.DAO.NoteDAO;
+import xyz.hnnknk.pistolstar.dao.NoteDAO;
 import xyz.hnnknk.pistolstar.entity.Note;
 
 import java.io.IOException;
@@ -22,6 +22,8 @@ public class MainController implements Initializable {
 
     @FXML
     private TableView notesTable;
+
+    NoteDAO noteDAO;
 
     @FXML
     private TableColumn<Note, String> nameColumn;
@@ -36,14 +38,14 @@ public class MainController implements Initializable {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("note.fxml"))));
     }
 
+
     @FXML
     private void searchNotes() throws SQLException, ClassNotFoundException {
         try {
-            ObservableList<Note> notesData = NoteDAO.searchNotes();
+            ObservableList<Note> notesData = noteDAO.searchNotes();
             populateNotes(notesData);
-        } catch (SQLException e){
-            System.out.println("Error occurred while getting notes information from DB.\n" + e);
-            throw e;
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -53,13 +55,17 @@ public class MainController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            searchNotes();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        noteDAO = new NoteDAO();
+        new Thread(() -> {
+            try {
+                searchNotes();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         bodyColumn.setCellValueFactory(cellData -> cellData.getValue().bodyProperty());

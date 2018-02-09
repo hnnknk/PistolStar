@@ -1,26 +1,29 @@
-package xyz.hnnknk.pistolstar;
+package xyz.hnnknk.pistolstar.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
-import xyz.hnnknk.pistolstar.DAO.NoteDAO;
+import xyz.hnnknk.pistolstar.dao.NoteDAO;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NoteController implements Initializable {
 
     public final int MAX_CHARS = 100;
+
+    NoteDAO noteDAO;
 
     @FXML private TextField name;
 
@@ -38,16 +41,20 @@ public class NoteController implements Initializable {
     }
 
     @FXML
-    private void insertNote () throws SQLException, ClassNotFoundException {
-        try {
-            NoteDAO.insertNote(name.getText(),"today", area.getText());
-        } catch (SQLException e) {
-            throw e;
-        }
+    private void insertNote () {
+        new Thread(() -> {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+            try {
+                noteDAO.insertNote(name.getText(),dateFormat.format(new Date()), area.getText());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        noteDAO = new NoteDAO();
         setTextFormatter();
     }
 }

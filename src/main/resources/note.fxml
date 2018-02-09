@@ -9,8 +9,8 @@
 <?import javafx.geometry.Insets?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="25" vgap="15"
-          fx:controller="xyz.hnnknk.pistolstar.NoteController"
-          prefHeight="475.0" prefWidth="650.0">
+          fx:controller="xyz.hnnknk.pistolstar.controller.NoteController"
+          prefHeight="575.0" prefWidth="1000.0">
 
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
 
