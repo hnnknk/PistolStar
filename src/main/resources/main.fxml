@@ -30,8 +30,4 @@
         </columns>
     </TableView>
 
-    <Button text="Обновить" onAction="#handleUpdateButtonAction"
-            GridPane.halignment="LEFT"
-            GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-
 </GridPane>

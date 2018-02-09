@@ -39,12 +39,6 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    protected void handleUpdateButtonAction() {
-        new Thread(this::searchNotes).start();
-    }
-
-
-    @FXML
     private void searchNotes() {
         try {
             ObservableList<Note> notesData = noteDAO.searchNotes();
