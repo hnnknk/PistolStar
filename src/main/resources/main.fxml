@@ -23,13 +23,13 @@
             GridPane.halignment="RIGHT"
     GridPane.columnIndex="3" GridPane.rowIndex="0"/>
 
-    <TableView  GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="1" GridPane.columnSpan="4">
+    <TableView fx:id="notesTable" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="1" GridPane.columnSpan="4">
         <columns>
-            <TableColumn text="Имя заметки" minWidth="100"/>
+            <TableColumn fx:id="nameColumn" text="Имя заметки" minWidth="100"/>
 
-            <TableColumn text="Дата заметки" minWidth="100"/>
+            <TableColumn fx:id="dateColumn" text="Дата заметки" minWidth="100"/>
 
-            <TableColumn text="Заметка" minWidth="400"/>
+            <TableColumn fx:id="bodyColumn" text="Заметка" minWidth="400"/>
 
         </columns>
     </TableView>

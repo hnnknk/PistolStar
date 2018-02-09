@@ -27,7 +27,7 @@
            GridPane.columnIndex="0" GridPane.rowIndex="2"
            GridPane.halignment="RIGHT"/>
 
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"
+    <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1"
             GridPane.halignment="LEFT"/>
 
     <TextArea fx:id="area" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="LEFT" wrapText="true" />

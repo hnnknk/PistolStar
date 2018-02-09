@@ -1,20 +1,26 @@
 package xyz.hnnknk.pistolstar.entity;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Note {
 
     private long id;
-    private String name;
-    private String date;
-    private String body;
+    private StringProperty name;
+    private StringProperty date;
+    private StringProperty body;
 
     public Note() {
+        this.name = new SimpleStringProperty();
+        this.date = new SimpleStringProperty();
+        this.body = new SimpleStringProperty();
     }
 
     public Note(long id, String name, String date, String body) {
         this.id = id;
-        this.name = name;
-        this.date = date;
-        this.body = body;
+        this.name.set(name);
+        this.date.set(date);
+        this.body.set(body);
     }
 
     public long getId() {
@@ -26,26 +32,38 @@ public class Note {
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
     }
 
     public String getDate() {
-        return date;
+        return date.get();
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date.set(date);
     }
 
     public String getBody() {
-        return body;
+        return body.get();
     }
 
     public void setBody(String body) {
-        this.body = body;
+        this.body.set(body);
+    }
+
+    public StringProperty dateProperty() {
+        return date;
+    }
+
+    public StringProperty bodyProperty() {
+        return body;
     }
 }
